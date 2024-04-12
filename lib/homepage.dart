@@ -81,11 +81,15 @@ class _HomePageState extends State<HomePage> {
                 children: [
                    Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                      children:[Text("SCORE"), Text("0")],
+                      children:[Text("SCORE  ", style: TextStyle(color: Colors.white, fontSize: 15)),
+                      SizedBox(
+                        height: 20,
+                      ),
+                       Text("0")],
                     ),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [Text("BEST"), Text("10")],
+                      children: [Text(" BEST",style: TextStyle(color: Colors.white, fontSize: 15), Text("10"))],
                     )
 
 
