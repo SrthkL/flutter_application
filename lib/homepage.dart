@@ -43,6 +43,26 @@ class _HomePageState extends State<HomePage> {
         birdYaxis = initialHeight - height;
 
       });
+      setState(() {
+        if(barrierXone < -1.1){
+        barrierXone +=2.2;
+      }else{
+        barrierXone -=0.05;
+      }
+
+        
+      });
+      setState(() {
+        if(barrierXtwo < -1.1){
+        barrierXtwo +=2.2;
+      }else{
+        barrierXtwo-=0.05;
+      }
+
+        
+      });
+      
+
       if(birdYaxis > 1){
         birdYaxis =1;
         timer.cancel();
@@ -56,16 +76,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          Expanded(
-            flex: 3,
-            child: Stack(
-          
-              children:[
-               GestureDetector(
-              onTap:(){
+    return GestureDetector(
+       onTap:(){
                 if(gameHasStarted){
                   jump();
                 }
@@ -73,6 +85,16 @@ class _HomePageState extends State<HomePage> {
                   startGame();
                 }
               },
+      child: Scaffold(
+      body: Column(
+        children: [
+          Expanded(
+            flex: 3,
+            child: Stack(
+          
+              children:[
+               
+             
             child: AnimatedContainer(
 
               alignment: Alignment(0,birdYaxis),
