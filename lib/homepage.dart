@@ -29,9 +29,9 @@ class _HomePageState extends State<HomePage> {
     void startGame(){
       gameHasStarted = true;
     
-    Timer.periodic(Duration(milliseconds: 60),(timer){
+    Timer.periodic(Duration(milliseconds: 50),(timer){
       time += 0.055;
-      height = -4.9 * time * time + 2.7 * time;
+      height = -2 * time * time + 2 * time;
       setState((){
 
         birdYaxis = initialHeight - height;
@@ -55,7 +55,10 @@ class _HomePageState extends State<HomePage> {
         children: [
           Expanded(
             flex: 3,
-            child: GestureDetector(
+            child: Stack(
+          
+              children:[
+               GestureDetector(
               onTap:(){
                 if(gameHasStarted){
                   jump();
@@ -65,12 +68,26 @@ class _HomePageState extends State<HomePage> {
                 }
               },
             child: AnimatedContainer(
+
               alignment: Alignment(0,birdYaxis),
               duration: Duration(milliseconds:0),
               color: const Color.fromARGB(255, 66, 156, 230),
               child: MyBird(),
-              )
+              ),
+            ),
+            Container(
+              alignment: Alignment(0,-0.3),
+
+
+              child: gameHasStarted ? Text(" ") : Text("TAP  TO PLAY", style: TextStyle(fontSize: 20, color: Colors.white)
             )
+             )
+              ]
+          ),
+          ),
+          Container(
+            height: 20,
+            color: Colors.green
           ),
           Expanded(
             child: Container(
@@ -81,35 +98,34 @@ class _HomePageState extends State<HomePage> {
                 children: [
                    Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                      children:[Text("SCORE  ", style: TextStyle(color: Colors.white, fontSize: 15)),
+                      children:[Text("SCORE  ", style: TextStyle(color: Colors.white, fontSize: 35)),
                       SizedBox(
                         height: 20,
                       ),
-                       Text("0")],
+                       Text("0", style: TextStyle(color: Colors.white, fontSize: 35))],
                     ),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [Text(" BEST",style: TextStyle(color: Colors.white, fontSize: 15), Text("10"))],
+                      children: [Text("BEST",style: TextStyle(color: Colors.white, fontSize: 35)), 
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text("10", style: TextStyle(color: Colors.white, fontSize: 35))],
                     )
-
-
-
-
-
-                  ]
-
-
-
-
-
-              ),)
-              
-              
+                  ],
               ),
+              
+              )
+          )
+              
+           ]   ,
+          )
 
+           
+          )
+          ;
 
-           ] ),
-        )
-    ;
+        
+    
   }
 }
