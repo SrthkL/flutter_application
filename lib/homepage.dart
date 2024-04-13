@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application/barriers.dart';
 
 import 'package:flutter_application/bird.dart';
 class HomePage extends StatefulWidget {
@@ -16,6 +17,8 @@ class _HomePageState extends State<HomePage> {
   double height = 0;
   double initialHeight = birdYaxis;
   bool gameHasStarted = false;
+  double barrierXtwo= barrierXone + 1.5;
+  static double barrierXone= 0;
 
 
     void jump(){
@@ -30,9 +33,12 @@ class _HomePageState extends State<HomePage> {
       gameHasStarted = true;
     
     Timer.periodic(Duration(milliseconds: 50),(timer){
+      
       time += 0.055;
       height = -2 * time * time + 2 * time;
       setState((){
+        barrierXone -= 0.03;
+        barrierXtwo -= 0.03;
 
         birdYaxis = initialHeight - height;
 
@@ -81,7 +87,33 @@ class _HomePageState extends State<HomePage> {
 
               child: gameHasStarted ? Text(" ") : Text("TAP  TO PLAY", style: TextStyle(fontSize: 20, color: Colors.white)
             )
-             )
+             ),
+            AnimatedContainer(
+              alignment: Alignment(barrierXone,1.1),
+              duration: Duration(milliseconds: 0),
+              child: MyBarrier(
+                size: 200.0,)
+            ),
+            AnimatedContainer(
+              alignment: Alignment(barrierXone,-1.1),
+              duration: Duration(milliseconds: 0),
+              child: MyBarrier(
+                size: 200.0,)
+            ),
+            AnimatedContainer(
+              alignment: Alignment(barrierXtwo,1.1),
+              duration: Duration(milliseconds: 0),
+              child: MyBarrier(
+                size: 150.0,)
+            ),
+            AnimatedContainer(
+              alignment: Alignment(barrierXtwo,-1.1),
+              duration: Duration(milliseconds: 0),
+              child: MyBarrier(
+                size: 250.0,)
+            ),
+
+
               ]
           ),
           ),
